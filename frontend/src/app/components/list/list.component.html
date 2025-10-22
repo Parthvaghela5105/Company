@@ -1,0 +1,28 @@
+<h2>User List</h2>
+<table border="1">
+  <tr><th>ID</th><th>Name</th><th>Email</th><th>Phone</th><th>Action</th></tr>
+  @for(user of users; track user.id)
+  {
+    <tr>
+        <td>{{user.id}}</td>
+        <td>{{user.name}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.phone}}</td>
+        <td>
+          <button (click)="deleteUser(user.id)">Delete</button>
+          <button (click)="editUser(user)">Edit</button>
+        </td>
+    </tr>
+  }
+</table>
+
+@if(editMode){
+  <h3>Edit User</h3>
+  <form (ngSubmit)="updateUser()">
+    <input type="text" [(ngModel)]="selectedUser.name" name="name" placeholder="Name" required />
+    <input type="email" [(ngModel)]="selectedUser.email" name="email" placeholder="Email" required />
+    <input type="text" [(ngModel)]="selectedUser.phone" name="phone" placeholder="Phone" required />
+    <button type="submit">Update</button>
+    <button type="button" (click)="editMode=false">Cancel</button>
+  </form>
+}
